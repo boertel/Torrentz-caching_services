@@ -1,0 +1,11 @@
+{
+    "name": "Torrentz using caching services",
+    "version": "1.0",
+    "description": "Add link for free torrent caching services like zoink.it and torrage.com",
+    "content_scripts": [{
+        "matches": [ "http://torrentz.eu/*" ], 
+        "js": ["jquery.min.js", "torrentz-caching-services.js"], 
+        "run_at": "document_end" 
+    }]
+}
+
