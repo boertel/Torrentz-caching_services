@@ -1,10 +1,34 @@
-$(".results dl a").each(function() {
-    var hash = $(this).attr('href')
-    var url_zoink = 'http://zoink.it/torrent'+hash.toUpperCase()+'.torrent';
-    var url_torrage = 'http://torrage.com/torrent'+hash.toUpperCase()+'.torrent';
-    var url_torcache = 'http://torcache.net/torrent'+hash.toUpperCase()+'.torrent';
-    var magnet = 'magnet:?xt=urn:btih:'+hash.substr(1,hash.length);
+var selector = ".results dl a",
+    nodes = Array.prototype.slice.call(document.querySelectorAll(selector), 0),
+    services = {
+        torrage: function (h) {
+            return 'http://torrage.com/torrent/' + h.toUpperCase() + '.torrent';
+        },
+        torcache: function (h) {
+            return 'http://torcache.net/torrent/' + h.toUpperCase() + '.torrent';
+        },
+        magnet: function (h) {
+            return 'magnet:?xt=urn:btih:' + h;
+        }
+    },
+    active = ['torrage', 'magnet', 'torcache'];
 
-    var insert = '<span> - </span><a href="' + url_zoink + '">Zoink.it</a> - <a href="' + url_torcache + '">Torcache</a>';
-    $(insert).insertAfter(this); 
+nodes.forEach(function (node) {
+    var hash = node.getAttribute('href').replace('/', '');
+    var container = document.createElement("span");
+
+    active.forEach(function (name) {
+        var service = services[name];
+        if (service) {
+            var dash = document.createTextNode(" - ");
+            container.appendChild(dash);
+
+            var a = document.createElement('a');
+            a.href = service(hash);
+            a.innerHTML = name[0].toUpperCase() + name[1] + name[2];
+            container.appendChild(a);
+        }
+    });
+
+    node.parentNode.appendChild(container);
 });
