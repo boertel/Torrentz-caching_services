@@ -58,17 +58,17 @@ internals.links = function (nodes) {
         active.forEach(function (name) {
             var service = services[name];
             if (service) {
-                var dash = document.createTextNode(" - ");
-                container.appendChild(dash);
-
                 var a = document.createElement('a');
                 a.href = service(hash);
                 a.innerHTML = name[0].toUpperCase() + name[1] + name[2];
                 container.appendChild(a);
+
+                var dash = document.createTextNode(" - ");
+                container.appendChild(dash);
             }
         });
 
-        node.parentNode.appendChild(container);
+        node.parentNode.insertBefore(container, node.parentNode.firstChild);
     });
 };
 
