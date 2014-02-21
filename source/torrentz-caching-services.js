@@ -24,6 +24,7 @@ var internals = {};
 
 internals.css = function () {
     var sheet = window.document.styleSheets[0];
+    sheet.addRule("div.results", "margin-bottom: 60px");
     sheet.addRule("div.results>dl>dt", "width: auto");
     sheet.addRule("div.results>dl>dt", "margin-left: 330px");
     sheet.addRule("div.results>dl>dt", "overflow-x: visible");
@@ -72,6 +73,17 @@ internals.links = function (nodes) {
     });
 };
 
+internals.hide = function () {
+    var divs = slice(document.querySelectorAll(".SimpleAcceptableTextAds, .top, .note, .relatedq, .recent, .footer"));
+    divs.forEach(function (div) {
+        div.parentNode.removeChild(div);
+    });
+
+    var h2 = document.querySelector(".results h2");
+    h2.style.visibility = "hidden";
+};
+
+internals.hide();
 internals.css();
 internals.links(torrents);
 internals.sum(dds);
