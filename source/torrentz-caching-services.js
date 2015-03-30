@@ -37,7 +37,7 @@ internals.css = function () {
 internals.sum = function (nodes) {
     nodes.forEach(function (node) {
         var peers = slice(node.querySelectorAll("span.u, span.d")).map(function (d) {
-            return parseInt(d.innerHTML, 10);
+            return parseInt(d.innerHTML.replace(",", ""), 10);
         });
         var sum = peers.reduce(function (prev, current) {
             return prev + current;
@@ -83,7 +83,17 @@ internals.hide = function () {
     h2.style.visibility = "hidden";
 };
 
+internals.removePopup = function () {
+    var today = new Date(),
+        tomorrow = new Date();
+    tomorrow.setDate(today.getDate()+7);
+    value = '1|' + tomorrow.toGMTString();
+    document.cookie = 'wgm=' + encodeURIComponent(value);
+    _wm.format.popunder.isTriggered = true;
+};
+
 internals.hide();
 internals.css();
 internals.links(torrents);
 internals.sum(dds);
+internals.removePopup();

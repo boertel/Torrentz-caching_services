@@ -4,7 +4,7 @@
     "manifest_version": 2,
     "description": "Add link for free torrent caching services",
     "content_scripts": [{
-        "matches": [ "http://torrentz.eu/*" ],
+        "matches": [ "https://torrentz.eu/*" ],
         "js": ["torrentz-caching-services.js"],
         "run_at": "document_end"
     }]
