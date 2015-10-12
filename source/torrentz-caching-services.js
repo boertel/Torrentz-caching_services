@@ -23,13 +23,14 @@ var selector = ".results dl a",
 var internals = {};
 
 internals.css = function () {
+    var marginLeft = 400;
     var sheet = window.document.styleSheets[0];
     sheet.addRule("div.results", "margin-bottom: 60px");
     sheet.addRule("div.results>dl>dt", "width: auto");
-    sheet.addRule("div.results>dl>dt", "margin-left: 330px");
+    sheet.addRule("div.results>dl>dt", "margin-left: " + marginLeft + "px");
     sheet.addRule("div.results>dl>dt", "overflow-x: visible");
     sheet.addRule("div.results>dl>dd", "float: left");
-    sheet.addRule("div.results>dl>dd", "width: 330px");
+    sheet.addRule("div.results>dl>dd", "width: " + marginLeft + "px");
     sheet.addRule("div.results>dl>dd>span.t", "width: 50px");
     sheet.addRule("div.results>dl>dd>span.t", "color: #75808A");
 };
